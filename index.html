@@ -199,9 +199,10 @@ h2 i{font-style:italic;color:#c9d0ff}
 .orbita .aro{--a0:0deg;position:absolute;inset:var(--i);border-radius:50%;border:1px solid rgba(94,242,198,.18);z-index:2;transform:rotate(var(--a0));animation:orbitar var(--t) linear infinite}
 @keyframes orbitar{from{transform:rotate(var(--a0))}to{transform:rotate(calc(var(--a0) + 360deg))}}
 @keyframes contra{from{transform:rotate(calc(-1 * var(--a0)))}to{transform:rotate(calc(-1 * var(--a0) - 360deg))}}
-.orbita .aro:nth-child(2){border-style:dashed;border-color:rgba(123,227,255,.16)}
+.orbita .aro.a2{border-style:dashed;border-color:rgba(123,227,255,.16)}
+.orbita .aro.eco{border-color:transparent}
 .orbita .aro .sat{position:absolute;top:50%;left:-7px;width:14px;height:14px;margin-top:-7px;border-radius:50%;background:var(--c);box-shadow:0 0 14px 2px var(--c);transform:rotate(calc(-1 * var(--a0)));animation:contra var(--t) linear infinite}
-.orbita .aro .sat b{position:absolute;left:22px;top:50%;transform:translateY(-50%);white-space:nowrap;font-size:13px;font-weight:500;letter-spacing:.05em;color:#dfe6ff;padding:5px 11px;border-radius:999px;background:rgba(8,10,26,.82);border:1px solid var(--linha);transform:translateY(-50%)}
+.orbita .aro .sat b{position:absolute;left:50%;top:20px;transform:translateX(-50%);white-space:nowrap;font-size:12.5px;font-weight:500;letter-spacing:.04em;color:#dfe6ff;padding:4px 10px;border-radius:999px;background:rgba(8,10,26,.82);border:1px solid var(--linha)}
 .planeta{position:absolute;inset:33%;z-index:1;border-radius:50%;background:radial-gradient(circle at 32% 28%,#d6fff2 0,#5ef2c6 18%,#1a8f9c 48%,#0b2f4a 78%,#06142a 100%);box-shadow:0 0 80px rgba(94,242,198,.45),inset -18px -22px 40px rgba(0,0,0,.55);display:grid;place-items:center}
 .planeta::after{content:"";position:absolute;inset:-14%;border-radius:50%;background:radial-gradient(circle,rgba(94,242,198,.25),transparent 62%);animation:respirar 5s ease-in-out infinite}
 @keyframes respirar{50%{transform:scale(1.12);opacity:.6}}
@@ -271,8 +272,13 @@ footer a:hover{color:#fff}
 @media (max-width:520px){
   body{font-size:16px}
   .trilha{grid-template-columns:1fr}
-  .orbita .aro .sat b{font-size:11.5px;padding:4px 9px}
+  .orbita{width:84%}
+  .orbita .aro .sat b{font-size:10.5px;padding:3px 8px;top:16px}
   .heroi{padding-top:96px}
+}
+@media (max-width:400px){
+  .orbita{width:86%}
+  .orbita .aro .sat b{font-size:9.5px;padding:2px 6px;letter-spacing:.02em}
 }
 @media (prefers-reduced-motion:reduce){
   .orbita .aro,.orbita .aro .sat{animation:none!important}
@@ -408,9 +414,17 @@ footer a:hover{color:#fff}
     <div class="conteudo">
       <div class="produto">
         <div class="orbita revelar" aria-hidden="true">
-          <div class="aro" style="--i:4%;--t:60s;--a0:300deg"><span class="sat" style="--c:#7be3ff"><b>Agenda</b></span></div>
-          <div class="aro" style="--i:15%;--t:42s;--a0:120deg"><span class="sat" style="--c:#ffd98a"><b>Prontuário</b></span></div>
-          <div class="aro" style="--i:24%;--t:30s;--a0:240deg"><span class="sat" style="--c:#ff86cf"><b>WhatsApp com IA</b></span></div>
+          <!-- Todas giram juntas (o mesmo --t): as estrelas se alternam entre as duas órbitas a cada 45°, e os rótulos longos ficam
+               longe uns dos outros, então nunca se encostam. -->
+          <div class="aro a1" style="--i:4%;--t:90s;--a0:0deg"><span class="sat" style="--c:#ff86cf"><b>WhatsApp com IA</b></span></div>
+          <div class="aro a1 eco" style="--i:4%;--t:90s;--a0:90deg"><span class="sat" style="--c:#ffd98a"><b>Prontuário</b></span></div>
+          <div class="aro a1 eco" style="--i:4%;--t:90s;--a0:180deg"><span class="sat" style="--c:#ffb38a"><b>Assinatura digital</b></span></div>
+          <div class="aro a1 eco" style="--i:4%;--t:90s;--a0:270deg"><span class="sat" style="--c:#8fd0ff"><b>Transcrição</b></span></div>
+          <div class="aro a2" style="--i:15%;--t:90s;--a0:45deg"><span class="sat" style="--c:#7be3ff"><b>Agenda</b></span></div>
+          <div class="aro a2 eco" style="--i:15%;--t:90s;--a0:135deg"><span class="sat" style="--c:#b79bff"><b>CRM</b></span></div>
+          <div class="aro a2 eco" style="--i:15%;--t:90s;--a0:225deg"><span class="sat" style="--c:#9dffb0"><b>Estoque</b></span></div>
+          <div class="aro a2 eco" style="--i:15%;--t:90s;--a0:315deg"><span class="sat" style="--c:#5ef2c6"><b>Financeiro</b></span></div>
+          <div class="aro a3" style="--i:24%;--t:60s;--a0:0deg"></div>
           <div class="planeta"><span>N</span></div>
         </div>
         <div>
@@ -422,6 +436,10 @@ footer a:hover{color:#fff}
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h6"/></svg>Prontuário eletrônico</div>
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 20l1.3-4A8 8 0 1 1 8 18.7z"/></svg>Atendimento por WhatsApp com IA</div>
             <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 19V5M4 19h16M8 15l4-4 3 3 5-6"/></svg>Gestão e financeiro</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="9" cy="8" r="3.5"/><path d="M3 20c.8-3.4 3.2-5 6-5s5.2 1.6 6 5M16 4.5a3.5 3.5 0 0 1 0 7M18 15c1.6.6 2.6 2.2 3 5"/></svg>CRM e relacionamento</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M3 8l9-5 9 5v8l-9 5-9-5z"/><path d="M3 8l9 5 9-5M12 13v8"/></svg>Controle de estoque</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M4 17c2-1 3-4 5-4s1 4 3 4 3-3 5-3M4 21h16"/><path d="M15 3l4 4-7 7H8v-4z"/></svg>Assinatura digital ICP-Brasil</div>
+            <div><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg>Transcrição da consulta com IA</div>
           </div>
           <a class="botao primario revelar" href="https://www.nexamedic.com.br/?utm_source=elenath&amp;utm_medium=site&amp;utm_campaign=institucional" rel="noopener">Conhecer o NexaMedic
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8"/></svg></a>
